@@ -75,6 +75,7 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
+/*
 let arr = ['a', 'b', 'c', 'd', 'e'];
 
 // SLICE
@@ -106,3 +107,17 @@ console.log([...arr, ...arr2]);
 
 // JOIN METHOD
 console.log(letters.join(' - ')); // a - b - c - d - e - f - g - h - i - j
+console.log(letters);
+*/
+
+// The at method
+const arr = [23, 11, 64];
+console.log(arr[0]); // 23
+console.log(arr.at(0)); // 23
+
+console.log(arr[arr.length - 1]); // 64
+console.log(arr.slice(-1)[0]); // 64
+console.log(arr.at(-1)); // 64
+
+console.log('durell'.at(0)); // d
+console.log('durell'.at(-1)); // l
