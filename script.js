@@ -180,3 +180,25 @@ currenciesUnique.forEach(function (value, _, map) {
   console.log(`${value}: ${value}`);
 });
 */
+
+// Coding Challenge #1
+const checkDogs = function (dogsJulia, dogsKate) {
+  const updatedDogsJulia = dogsJulia.slice();
+  updatedDogsJulia.splice(0, 1);
+  updatedDogsJulia.splice(-2);
+  const dogs = updatedDogsJulia.concat(dogsKate);
+  dogs.forEach(function (dog, i) {
+    const adultOrNot =
+      dog >= 3 ? `an adult, and is ${dog} years old` : `still a puppy`;
+    console.log(`Dog number ${i + 1} is ${adultOrNot}`);
+  });
+};
+
+const julia1 = [3, 5, 2, 12, 7],
+  kate1 = [4, 1, 15, 8, 3],
+  julia2 = [9, 16, 6, 8, 3],
+  kate2 = [10, 5, 6, 1, 4];
+
+checkDogs(julia1, kate1);
+console.log(`======= TEST CASE 2 =======`);
+checkDogs(julia2, kate2);
