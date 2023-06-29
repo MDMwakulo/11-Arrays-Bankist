@@ -258,6 +258,7 @@ const withdrawals = movements.filter(mov => mov < 0);
 console.log(withdrawals);
 */
 
+/*
 console.log(movements);
 
 // accumulator --> SNOWBALL
@@ -279,3 +280,29 @@ const max = movements.reduce((acc, mov) => {
   else return mov;
 }, movements[0]);
 console.log(max);
+*/
+
+// Coding Challenge #2
+const calcAverageHumanAge = function (ages) {
+  const humanAge = ages.map(dogAge =>
+    dogAge <= 2 ? 2 * dogAge : 16 + dogAge * 4
+  );
+  const adultDogs = humanAge.filter(ages => ages >= 18);
+  // const averageAge =
+  //   adultDogs.reduce((acc, age) => acc + age, 0) / adultDogs.length;
+  const averageAge = adultDogs.reduce(
+    (acc, age, i, arr) => acc + age / arr.length,
+    0
+  );
+  console.log(humanAge);
+  console.log(adultDogs);
+
+  // 2,3 --> (2+3)/2 = 2.5 --> 2/2+3/2 = 2.5
+
+  return averageAge;
+};
+
+const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+console.log(`========== TEST 2 ==========`);
+const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
+console.log(avg1, avg2);
