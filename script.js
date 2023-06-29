@@ -71,7 +71,7 @@ const displayMovements = function (movements) {
       <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-      <div class="movements__value">${mov}</div>
+      <div class="movements__value">${mov}€</div>
     </div>
     `;
     containerMovements.insertAdjacentHTML('afterbegin', html);
@@ -82,9 +82,33 @@ displayMovements(account1.movements);
 
 const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, movement) => acc + movement, 0);
-  labelBalance.textContent = `${balance} EUR`;
+  labelBalance.textContent = `${balance}€`;
 };
 calcDisplayBalance(account1.movements);
+
+const calcDisplaySummary = function (movements) {
+  // Money in
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov, i, arr) => acc + mov, 0);
+  labelSumIn.textContent = `${incomes}€`;
+
+  // Money out
+  const withdrawals = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov);
+  labelSumOut.textContent = `${Math.abs(withdrawals)}€`;
+
+  // Interest of Money in
+  const interest = movements
+    .filter(mov => mov > 0)
+    .map(deposit => deposit * 0.012)
+    .filter(interest => interest >= 1)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumInterest.textContent = `${interest}€`;
+};
+calcDisplaySummary(account1.movements);
+
 const user = 'Steven Thomas Williams'; // stw
 
 const createUserNames = function (accs) {
@@ -282,6 +306,7 @@ const max = movements.reduce((acc, mov) => {
 console.log(max);
 */
 
+/*
 // Coding Challenge #2
 const calcAverageHumanAge = function (ages) {
   const humanAge = ages.map(dogAge =>
@@ -306,3 +331,17 @@ const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
 console.log(`========== TEST 2 ==========`);
 const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
 console.log(avg1, avg2);
+*/
+const eurToUsd = 1.1;
+console.log(movements);
+
+// PIPELINE
+const totalDepositsUSD = movements
+  .filter(mov => mov > 0)
+  .map((mov, i, arr) => {
+    // console.log(arr);
+    return mov * eurToUsd;
+  })
+  // .map(mov => mov * eurToUsd)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(totalDepositsUSD); // 5522.000000000001
