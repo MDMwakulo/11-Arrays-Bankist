@@ -332,6 +332,8 @@ console.log(`========== TEST 2 ==========`);
 const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
 console.log(avg1, avg2);
 */
+
+/*
 const eurToUsd = 1.1;
 console.log(movements);
 
@@ -345,3 +347,14 @@ const totalDepositsUSD = movements
   // .map(mov => mov * eurToUsd)
   .reduce((acc, mov) => acc + mov, 0);
 console.log(totalDepositsUSD); // 5522.000000000001
+*/
+
+// Challenge #3
+const calcAverageHumanAge = ages =>
+  ages
+    .map(dogAge => (dogAge <= 2 ? 2 * dogAge : 16 + dogAge * 4))
+    .filter(dogAge => dogAge >= 18)
+    .reduce((acc, dogAge, i, arr) => acc + dogAge / arr.length, 0);
+console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]));
+console.log(`========== TEST 2 ==========`);
+console.log(calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]));
