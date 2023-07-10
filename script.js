@@ -547,6 +547,7 @@ const overalBalance2 = accounts
 console.log(overalBalance2); // 17840
 */
 
+/*
 // Strings
 const owners = ['Jonas', 'Zach', 'Adam', 'Martha'];
 console.log(owners.sort()); // ['Adam', 'Jonas', 'Martha', 'Zach']
@@ -573,3 +574,42 @@ console.log(movements);
 // });
 movements.sort((a, b) => b - a);
 console.log(movements);
+*/
+
+const arr = [1, 2, 3, 4, 5, 6, 7]; // [1, 2, 3, 4, 5, 6, 7]
+console.log(new Array(1, 2, 3, 4, 5, 6, 7)); // [1, 2, 3, 4, 5, 6, 7]
+
+// Empty arrays + fill method
+const x = new Array(7);
+console.log(x); // [empty × 7]
+// console.log(x.map(() => 5));
+x.fill(1, 3, 5);
+x.fill(1);
+console.log(x); // [empty × 3, 1, 1, empty × 2]
+
+arr.fill(23, 2, 6);
+console.log(arr);
+
+// Array.from
+const y = Array.from({ length: 7 }, () => 1);
+console.log(y); // [1, 1, 1, 1, 1, 1, 1]
+
+const z = Array.from({ length: 7 }, (_, i) => i + 1);
+console.log(z); // [1, 2, 3, 4, 5, 6, 7]
+
+const diceRolls = Array.from(
+  { length: 100 },
+  () => Math.trunc(Math.random() * 6) + 1
+);
+console.log(diceRolls);
+
+labelBalance.addEventListener('click', function () {
+  const movementsUI = Array.from(
+    document.querySelectorAll('.movements__value'),
+    el => Number(el.textContent.replace('€', ''))
+  );
+  console.log(movementsUI);
+  // the above code is similar to the one below
+  const movementsUI2 = [...document.querySelectorAll('.movements__value')];
+  console.log(movementsUI2.map(el => Number(el.textContent.replace('€', ''))));
+});
