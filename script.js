@@ -616,6 +616,7 @@ labelBalance.addEventListener('click', function () {
 });
 */
 
+/*
 // Array Methods Practice
 // 1
 const movementsArr = accounts.flatMap(acc => acc.movements);
@@ -671,3 +672,88 @@ console.log(convertTitleCase('this is a long title but not too long'));
 console.log(convertTitleCase('and here is another title with an EXAMPLE'));
 
 console.log(deposits, withdrawals);
+*/
+
+// Coding Challenge 4
+const dogs = [
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+  { weight: 32, curFood: 340, owners: ['Michael'] },
+];
+
+// 1
+dogs.forEach(
+  dog => (dog.recommendedFood = Math.trunc(dog.weight ** 0.75 * 28))
+);
+console.log(dogs);
+
+// {weihght: 22, curFood: 250, owners: Array(2), recommendedFood: 284.4297646615672}
+// {weight: 8, curFood: 200, owners: Array(1), recommendedFood: 133.19119688030474}
+// {weight: 13, curFood: 275, owners: Array(2), recommendedFood: 191.69710117664528}
+// {weigt: 32, curFood: 340, owners: Array(1), recommendedFood: 376.72159403366413}
+
+// 2
+// dogs.map(dog => {
+//   if (dog.owners.includes('Sarah')) {
+//     if (dog.curFood > dog.recommendedFood * 1.1)
+//       return console.log(`Dog is eating too much`);
+//     else if (dog.curFood < dog.recommendedFood * 0.9)
+//       return console.log(`Dog is eating too little`);
+//   }
+// });
+
+const sarahFind = dogs.find(dog => dog.owners.includes('Sarah'));
+console.log(
+  `Sarah's dog is eating too ${
+    sarahFind.curFood > sarahFind.recommendedFood ? 'much' : 'little'
+  }.`
+);
+
+// 3.
+const ownersEatTooMuch = dogs
+  .filter(dog => dog.curFood > dog.recommendedFood)
+  .flatMap(dog => dog.owners);
+const ownersEatTooLittle = dogs
+  .filter(dog => dog.curFood < dog.recommendedFood)
+  .flatMap(dog => dog.owners);
+
+console.log(ownersEatTooMuch);
+console.log(ownersEatTooLittle);
+
+// 4
+// let tooMuchString = '';
+// ownersEatTooMuch.forEach((owner, i, arr) => {
+//   if (i !== arr.length - 1) tooMuchString += `${owner} and `;
+//   else tooMuchString += `${owner}'s dogs eat too much!`;
+// });
+// console.log(tooMuchString);
+
+// let tooLittleString = '';
+// ownersEatTooLittle.forEach((owner, i, arr) => {
+//   if (i !== arr.length - 1) tooLittleString += `${owner} and `;
+//   else tooLittleString += `${owner}'s dogs eat too little!`;
+// });
+// console.log(tooLittleString);
+
+console.log(`${ownersEatTooMuch.join(' and ')}'s dogs eat too much!`);
+console.log(`${ownersEatTooLittle.join(' and ')}'s dogs eat too little!`);
+
+// 5
+console.log(dogs.some(dog => dog.curFood === dog.recommendedFood));
+
+// 6
+
+const checkEatingOkay = dog =>
+  dog.curFood <= dog.recommendedFood * 1.1 &&
+  dog.curFood >= dog.recommendedFood * 0.9;
+console.log(dogs.some(checkEatingOkay));
+
+// 7
+console.log(dogs.filter(checkEatingOkay));
+
+// 8
+const arrangedArr = dogs
+  .slice()
+  .sort((a, b) => a.recommendedFood - b.recommendedFood);
+console.log(arrangedArr);
