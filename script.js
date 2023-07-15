@@ -576,6 +576,7 @@ movements.sort((a, b) => b - a);
 console.log(movements);
 */
 
+/*
 const arr = [1, 2, 3, 4, 5, 6, 7]; // [1, 2, 3, 4, 5, 6, 7]
 console.log(new Array(1, 2, 3, 4, 5, 6, 7)); // [1, 2, 3, 4, 5, 6, 7]
 
@@ -613,3 +614,60 @@ labelBalance.addEventListener('click', function () {
   const movementsUI2 = [...document.querySelectorAll('.movements__value')];
   console.log(movementsUI2.map(el => Number(el.textContent.replace('€', ''))));
 });
+*/
+
+// Array Methods Practice
+// 1
+const movementsArr = accounts.flatMap(acc => acc.movements);
+console.log(movementsArr);
+const bankDepositSum = accounts
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov > 0)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(bankDepositSum);
+
+// 2
+// const numDeposits1000 = accounts
+//   .flatMap(acc => acc.movements)
+//   .filter(mov => mov >= 1000).length;
+
+const numDeposits1000 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, mov, i, arr) => (mov >= 1000 ? ++acc : acc), 0);
+
+console.log(numDeposits1000);
+
+// Prefix ++ operator
+let a = 10;
+console.log(a++); // 10
+console.log(++a); // 11
+console.log(a);
+
+// 3.
+const { deposits, withdrawals } = accounts
+  .flatMap(acc => acc.movements)
+  .reduce(
+    (sums, curr) => {
+      // curr > 0 ? (sums.deposits += curr) : (sums.withdrawals += Math.abs(curr));
+      sums[curr > 0 ? 'deposits' : 'withdrawals'] += curr;
+      return sums;
+    },
+    { deposits: 0, withdrawals: 0 }
+  );
+
+// 4.
+const convertTitleCase = function (title) {
+  const capitalizeStr = word => word.replace(word[0], word[0].toUpperCase());
+  const exeptions = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map(word => (exeptions.includes(word) ? word : capitalizeStr(word)))
+    .join(' ');
+  return capitalizeStr(titleCase);
+};
+console.log(convertTitleCase('this is a nice title'));
+console.log(convertTitleCase('this is a long title but not too long'));
+console.log(convertTitleCase('and here is another title with an EXAMPLE'));
+
+console.log(deposits, withdrawals);
